@@ -1,4 +1,4 @@
-import { init, chatbot } from '../index';
+import { init, readData } from '../index';
 
 const jsondata = [
   {
@@ -32,9 +32,9 @@ test('init func', () => {
 });
 
 test('chatbot func', () => {
-  expect(chatbot(jsondata, 'document')).toEqual(["confirmedBenefitList", "highValueGoodsList", "exploreDestinationLink"]);
+  expect(readData(jsondata, 'document')).toEqual(["confirmedBenefitList", "highValueGoodsList", "exploreDestinationLink"]);
 });
 
 test('chatbot func', () => {
-  expect(chatbot(jsondata, 'document', 'confirmedBenefitList')).toEqual('pdfConfirmedBenefits');
+  expect(readData(jsondata, 'document', 'confirmedBenefitList')).toEqual('pdfConfirmedBenefits');
 });
