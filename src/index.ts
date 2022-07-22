@@ -4,7 +4,7 @@ export const init = (jsonData: any[]) => {
     return msg;
 };
 
-export const chatbot = (jsonData: any[], option: string | number, type?: any) => {
+export const readData = (jsonData: any[], option: string | number, type?: any) => {
     let op: any;
     const response = jsonData.find((ele) => ele[option]);
     if (response) {
