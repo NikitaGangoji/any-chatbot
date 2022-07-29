@@ -11,7 +11,7 @@ export const fetchData = (jsonData: any, option?: any) => {
   } else {
     welcome = 'Hi! This is your personal Assistant. Please choose from below services!';
   }
-  for (const key in Object.keys(jsonData)) {
+  for (const key in jsonData) {
     if (jsonData.hasOwnProperty(key)) {
       if (typeof Object.values(key) === 'object') {
         keys.push(key);
