@@ -1,6 +1,6 @@
 {
   "name": "any-chatbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My simple chatbot",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,7 +19,9 @@
     "type": "git",
     "url": "git+https://github.com/NikitaGangoji/any-chatbot.git"
   },
-  "keywords": ["chatbot"],
+  "keywords": [
+    "chatbot"
+  ],
   "author": "NikitaG",
   "license": "ISC",
   "bugs": {

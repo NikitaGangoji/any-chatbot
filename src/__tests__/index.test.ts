@@ -1,40 +1,61 @@
-import { init, readData } from '../index';
+import { fetchData } from '../index';
 
-const jsondata = [
-  {
-    "document": [
-      {
-        "type": "confirmedBenefitList",
-        "data": "pdfConfirmedBenefits"
-      },
-      {
-        "type": "highValueGoodsList",
-        "data": "pdfHighValueGoods"
-      },
-      {
-        "type": "exploreDestinationLink",
-        "data": "https://www.globallocalliving.com/direct?c=cartus_gll"
-      }
-    ]
+const jsondata = {
+  PersonalInfo: {
+    'Family Info': {
+      api: '',
+      type: '',
+      response: '{familyMembers}',
+    },
+    'Profile Info': {
+      api: '',
+      type: '',
+      response: '{profileDetails}',
+    },
   },
-  {
-    "contactInfo": [
-      {
-        "type": "consultant",
-        "data": "93002002001"
-      }
-    ]
-  }
-]
+  Benefits: {
+    'Available Benefits': {
+      api: '',
+      type: '',
+      response: '{availableBenefits}',
+    },
+    'Confirmed Benefits': {
+      api: '',
+      type: '',
+      response: '{confirmedBenefits}',
+    },
+  },
+  ExternalLinks: {
+    cartusOnlineLink: {
+      api: '',
+      type: '',
+      response: '{cartusOnline}',
+    },
+  },
+  ContactInfo: {
+    ConsultantPhoneContact: {
+      api: '',
+      type: '',
+      response: '{consultantPhone}',
+    },
+    ConsultantEmailContact: {
+      api: '',
+      type: '',
+      response: '{consultantEmail}',
+    },
+  },
+};
 
-test('init func', () => {
-  expect(init(jsondata)).toBe('Welcome!!!, choose from below: <br/> document,contactInfo');
+test('chatbot func', () => {
+  expect(fetchData(jsondata)).toEqual(
+    'Hi! This is your personal Assistant. Please choose from below services! <br/> PersonalInfo<br/>Benefits<br/>ExternalLinks<br/>ContactInfo',
+  );
 });
 
 test('chatbot func', () => {
-  expect(readData(jsondata, 'document')).toEqual(["confirmedBenefitList", "highValueGoodsList", "exploreDestinationLink"]);
+  expect(fetchData(jsondata, 'PersonalInfo')).toEqual('Family Info<br/>Profile Info');
 });
 
 test('chatbot func', () => {
-  expect(readData(jsondata, 'document', 'confirmedBenefitList')).toEqual('pdfConfirmedBenefits');
+  expect(fetchData(jsondata, 'PersonalInfo-Family Info')).toEqual('{familyMembers}');
 });

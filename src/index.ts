@@ -1,21 +1,26 @@
-export const init = (jsonData: any[]) => {
-    const options = jsonData.flatMap(Object.keys);
-    const msg = `Welcome!!!, choose from below: <br/> ${options}`;
-    return msg;
-};
-
-export const readData = (jsonData: any[], option: string | number, type?: any) => {
-    let op: any;
-    const response = jsonData.find((ele) => ele[option]);
-    if (response) {
-        if (option && type) {
-            op = Object.values(response);
-            op = op.flat().find((item: any) => item.type === type);
-            op = op.data;
-        } else if (option && !type) {
-            op = Object.values(response);
-            op = op.flat().map((item: any) => item.type);
-        }
+export const fetchData = (jsonData: any, option?: any) => {
+  const keys: any[] = [];
+  let welcome;
+  if (option) {
+    const options = option.split('-');
+    let n = options.length;
+    while (n !== 0) {
+      jsonData = jsonData[options[options.length - n]];
+      n--;
     }
-    return op;
+  } else {
+    welcome = 'Hi! This is your personal Assistant. Please choose from below services!';
+  }
+  for (const key in Object.keys(jsonData)) {
+    if (jsonData.hasOwnProperty(key)) {
+      if (typeof Object.values(key) === 'object') {
+        keys.push(key);
+      }
+      if (key === 'response') {
+        return jsonData[key];
+      }
+    }
+  }
+  const keynew = keys.join('<br/>');
+  return welcome ? `${welcome} <br/> ${keynew}` : keynew;
 };
